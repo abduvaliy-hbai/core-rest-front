@@ -33,7 +33,9 @@ export function RecordsPanel({ days, error, loading, selectedMember }: RecordsPa
         borderTop: breakpoint === "phone" ? `1px solid ${B.line}` : "none",
         borderBottom: isTablet ? `1px solid ${B.line}` : "none",
         height: isStacked ? "auto" : "100%",
-        maxHeight: isTablet ? "52vh" : undefined,
+        // Capped so the list scrolls inside its own box instead of running the
+        // page on for a long range; the summary above it stays reachable.
+        maxHeight: breakpoint === "phone" ? "58vh" : isTablet ? "52vh" : undefined,
         overflow: "hidden",
       }}
     >
