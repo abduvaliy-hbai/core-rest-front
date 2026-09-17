@@ -16,7 +16,9 @@ type RecordsPanelProps = {
 export function RecordsPanel({ days, error, loading, selectedMember }: RecordsPanelProps) {
   // The API returns days oldest-first; the scroll reads best with the newest day on top.
   const records = [...days].reverse();
-  const isStacked = useBreakpoint() !== "desktop";
+  const breakpoint = useBreakpoint();
+  const isStacked = breakpoint !== "desktop";
+  const isTablet = breakpoint === "tablet";
 
   return (
     <div
@@ -28,7 +30,7 @@ export function RecordsPanel({ days, error, loading, selectedMember }: RecordsPa
         borderRight: isStacked ? "none" : `1px solid ${B.line}`,
         borderBottom: isStacked ? `1px solid ${B.line}` : "none",
         height: isStacked ? "auto" : "100%",
-        maxHeight: isStacked ? "52vh" : undefined,
+        maxHeight: isTablet ? "52vh" : undefined,
         overflow: "hidden",
       }}
     >

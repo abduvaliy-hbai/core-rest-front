@@ -61,6 +61,9 @@ export function PeoplePanel({
 }: PeoplePanelProps) {
   const breakpoint = useBreakpoint();
   const isStacked = breakpoint !== "desktop";
+  // On a phone the roster owns the whole page, so it grows freely; on a tablet
+  // it shares the scroll with the panes below and has to yield room.
+  const isTablet = breakpoint === "tablet";
 
   return (
     <div
@@ -72,10 +75,8 @@ export function PeoplePanel({
         background: B.surface,
         borderRight: isStacked ? "none" : `1px solid ${B.line}`,
         borderBottom: isStacked ? `1px solid ${B.line}` : "none",
-        // Stacked, the roster must not eat the whole screen before the panels
-        // below it; it keeps its own scroll inside a capped height.
         height: isStacked ? "auto" : "100%",
-        maxHeight: isStacked ? "46vh" : undefined,
+        maxHeight: isTablet ? "46vh" : undefined,
         overflow: "hidden",
       }}
     >
