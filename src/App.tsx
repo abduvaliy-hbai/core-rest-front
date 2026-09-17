@@ -108,7 +108,7 @@ export default function App() {
 
   if (isPhone) {
     return (
-      <div style={shell}>
+      <div className="app-shell-fixed" style={{ ...shell, height: undefined, minHeight: undefined }}>
         {showDetail ? (
           <>
             <BackBar onBack={closeDetail} title={displayName(dashboard.selectedMember)} />

@@ -32,10 +32,12 @@ export function RecordsPanel({ days, error, loading, selectedMember }: RecordsPa
         // them belongs on top; on a tablet it still sits above the summary.
         borderTop: breakpoint === "phone" ? `1px solid ${B.line}` : "none",
         borderBottom: isTablet ? `1px solid ${B.line}` : "none",
-        height: isStacked ? "auto" : "100%",
-        // Capped so the list scrolls inside its own box instead of running the
-        // page on for a long range; the summary above it stays reachable.
-        maxHeight: breakpoint === "phone" ? "58vh" : isTablet ? "52vh" : undefined,
+        height: isTablet ? "auto" : "100%",
+        // Takes whatever the summary leaves and scrolls inside it, so a long
+        // range never pushes the page past the viewport.
+        flex: breakpoint === "phone" ? "1 1 0" : undefined,
+        minHeight: breakpoint === "phone" ? 120 : 0,
+        maxHeight: isTablet ? "52vh" : undefined,
         overflow: "hidden",
       }}
     >

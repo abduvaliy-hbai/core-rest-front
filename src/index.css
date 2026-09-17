@@ -74,3 +74,9 @@ input {
   outline: 2px solid #ffb902;
   outline-offset: 2px;
 }
+
+.app-shell-fixed {
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+}

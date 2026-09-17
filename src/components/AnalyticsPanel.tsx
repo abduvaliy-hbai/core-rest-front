@@ -35,20 +35,23 @@ export function AnalyticsPanel({
   return (
     <div
       style={{
-        flex: 1,
+        // Inside the locked phone shell the summary keeps its natural height but
+        // may shrink, and scrolls internally rather than growing the page.
+        flex: isPhone ? "0 1 auto" : 1,
         minWidth: isPhone ? 0 : 360,
         display: "flex",
         flexDirection: "column",
         background: B.surfaceLow,
+        minHeight: 0,
         height: isPhone ? "auto" : "100%",
-        overflow: isPhone ? "visible" : "hidden",
+        overflow: "hidden",
       }}
     >
       <div
         className="scrollable"
         style={{
           flex: 1,
-          overflowY: isPhone ? "visible" : "auto",
+          overflowY: "auto",
           padding: isPhone ? "18px 16px 24px" : "22px 28px",
         }}
       >

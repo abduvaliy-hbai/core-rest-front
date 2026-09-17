@@ -75,7 +75,9 @@ export function PeoplePanel({
         background: B.surface,
         borderRight: isStacked ? "none" : `1px solid ${B.line}`,
         borderBottom: isStacked ? `1px solid ${B.line}` : "none",
-        height: isStacked ? "auto" : "100%",
+        flex: breakpoint === "phone" ? 1 : undefined,
+        minHeight: 0,
+        height: isTablet ? "auto" : "100%",
         maxHeight: isTablet ? "46vh" : undefined,
         overflow: "hidden",
       }}
