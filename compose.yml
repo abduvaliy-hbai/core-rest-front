@@ -1,0 +1,20 @@
+services:
+  attendance-dashboard-v2:
+    build:
+      context: .
+    image: bride-sh/attendance-dashboard-v2:latest
+    restart: unless-stopped
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      PORT: 8080
+      BRIDE_API_INTERNAL_URL: ${BRIDE_API_INTERNAL_URL:-http://api:8000/api/v1}
+    ports:
+      - "${ATTENDANCE_DASHBOARD_V2_PORT:-5176}:8080"
+    networks:
+      - bride-rest-api-orm_default
+
+networks:
+  bride-rest-api-orm_default:
+    external: true
