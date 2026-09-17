@@ -1,0 +1,16 @@
+# Local design review only -- standalone, no shared network, no local API needed.
+#   docker compose -f compose.local.yml up --build
+#
+# The upstream is pinned rather than interpolated: a .env left over from a server
+# checkout points at `http://api:...`, which resolves to nothing on a laptop and
+# would turn every request into a 502. Point it somewhere else by editing here.
+services:
+  attendance-dashboard-v2:
+    build:
+      context: .
+    image: bride-sh/attendance-dashboard-v2:local
+    environment:
+      PORT: 8080
+      BRIDE_API_INTERNAL_URL: https://attendance.humblebee.ai/api
+    ports:
+      - "${ATTENDANCE_DASHBOARD_V2_PORT:-5176}:8080"
