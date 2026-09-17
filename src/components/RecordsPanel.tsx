@@ -28,7 +28,10 @@ export function RecordsPanel({ days, error, loading, selectedMember }: RecordsPa
         display: "flex",
         flexDirection: "column",
         borderRight: isStacked ? "none" : `1px solid ${B.line}`,
-        borderBottom: isStacked ? `1px solid ${B.line}` : "none",
+        // On a phone this sits under the summary, so the rule that separates
+        // them belongs on top; on a tablet it still sits above the summary.
+        borderTop: breakpoint === "phone" ? `1px solid ${B.line}` : "none",
+        borderBottom: isTablet ? `1px solid ${B.line}` : "none",
         height: isStacked ? "auto" : "100%",
         maxHeight: isTablet ? "52vh" : undefined,
         overflow: "hidden",

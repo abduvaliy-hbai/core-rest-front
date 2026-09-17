@@ -65,23 +65,33 @@ export default function App() {
     />
   );
 
+  const recordsPanel = (
+    <RecordsPanel
+      days={dashboard.visibleDays}
+      error={dashboard.historyError}
+      loading={dashboard.historyLoading}
+      selectedMember={dashboard.selectedMember}
+    />
+  );
+
+  const analyticsPanel = (
+    <AnalyticsPanel
+      error={dashboard.historyError}
+      fromDate={dashboard.fromDate}
+      loading={dashboard.historyLoading}
+      rangeDays={dashboard.selectedRangeDays}
+      selectedMember={dashboard.selectedMember}
+      summary={dashboard.selectedSummary}
+      toDate={dashboard.toDate}
+    />
+  );
+
+  // The status page leads with the summary and puts the day-by-day list under
+  // it; side by side, the list reads as the left-hand index into the summary.
   const statusPanels = (
     <>
-      <RecordsPanel
-        days={dashboard.visibleDays}
-        error={dashboard.historyError}
-        loading={dashboard.historyLoading}
-        selectedMember={dashboard.selectedMember}
-      />
-      <AnalyticsPanel
-        error={dashboard.historyError}
-        fromDate={dashboard.fromDate}
-        loading={dashboard.historyLoading}
-        rangeDays={dashboard.selectedRangeDays}
-        selectedMember={dashboard.selectedMember}
-        summary={dashboard.selectedSummary}
-        toDate={dashboard.toDate}
-      />
+      {recordsPanel}
+      {analyticsPanel}
     </>
   );
 
@@ -102,7 +112,8 @@ export default function App() {
         {showDetail ? (
           <>
             <BackBar onBack={closeDetail} title={displayName(dashboard.selectedMember)} />
-            {statusPanels}
+            {analyticsPanel}
+            {recordsPanel}
           </>
         ) : (
           <>
