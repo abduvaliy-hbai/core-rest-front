@@ -42,7 +42,17 @@ function arc(start: number, end: number, color: string) {
   );
 }
 
-export function Donut({ onTime, late, missed }: { onTime: number; late: number; missed: number }) {
+export function Donut({
+  onTime,
+  late,
+  missed,
+  size = SIZE,
+}: {
+  onTime: number;
+  late: number;
+  missed: number;
+  size?: number;
+}) {
   const total = onTime + late + missed;
   const percent = total === 0 ? 0 : Math.round((onTime / total) * 100);
   const onTimeFraction = total === 0 ? 0 : onTime / total;
@@ -50,7 +60,7 @@ export function Donut({ onTime, late, missed }: { onTime: number; late: number; 
 
   return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 14 }}>
-      <svg width={SIZE} height={SIZE} viewBox={`0 0 ${SIZE} ${SIZE}`}>
+      <svg width={size} height={size} viewBox={`0 0 ${SIZE} ${SIZE}`}>
         {total === 0 ? (
           <Ring color={B.faint} />
         ) : (

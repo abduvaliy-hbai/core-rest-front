@@ -1,4 +1,5 @@
 import { formatStatus } from "../format";
+import { useBreakpoint } from "../hooks/useBreakpoint";
 import { B, MONO, SANS } from "../theme";
 import type { DailyStatusMember, DailyStatusOffice } from "../types";
 import { displayName, statusColor } from "../utils/statusSummary";
@@ -58,16 +59,23 @@ export function PeoplePanel({
   query,
   selectedUserId,
 }: PeoplePanelProps) {
+  const breakpoint = useBreakpoint();
+  const isStacked = breakpoint !== "desktop";
+
   return (
     <div
       style={{
-        width: 310,
+        width: isStacked ? "100%" : 310,
         flexShrink: 0,
         display: "flex",
         flexDirection: "column",
         background: B.surface,
-        borderRight: `1px solid ${B.line}`,
-        height: "100%",
+        borderRight: isStacked ? "none" : `1px solid ${B.line}`,
+        borderBottom: isStacked ? `1px solid ${B.line}` : "none",
+        // Stacked, the roster must not eat the whole screen before the panels
+        // below it; it keeps its own scroll inside a capped height.
+        height: isStacked ? "auto" : "100%",
+        maxHeight: isStacked ? "46vh" : undefined,
         overflow: "hidden",
       }}
     >

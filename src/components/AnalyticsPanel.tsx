@@ -1,3 +1,4 @@
+import { useBreakpoint } from "../hooks/useBreakpoint";
 import { B, MONO } from "../theme";
 import type { DailyStatusMember } from "../types";
 import { rangeLabel } from "../utils/dateRange";
@@ -24,6 +25,7 @@ export function AnalyticsPanel({
   summary,
   toDate,
 }: AnalyticsPanelProps) {
+  const isPhone = useBreakpoint() === "phone";
   const cards = [
     { label: "Tracked days", value: summary.total, sub: "inside selected range", color: B.text },
     { label: "On-time streak", value: summary.onTimeStreak, sub: "consecutive days", color: B.green },
@@ -34,15 +36,22 @@ export function AnalyticsPanel({
     <div
       style={{
         flex: 1,
-        minWidth: 360,
+        minWidth: isPhone ? 0 : 360,
         display: "flex",
         flexDirection: "column",
         background: B.surfaceLow,
-        height: "100%",
-        overflow: "hidden",
+        height: isPhone ? "auto" : "100%",
+        overflow: isPhone ? "visible" : "hidden",
       }}
     >
-      <div className="scrollable" style={{ flex: 1, overflowY: "auto", padding: "22px 28px" }}>
+      <div
+        className="scrollable"
+        style={{
+          flex: 1,
+          overflowY: isPhone ? "visible" : "auto",
+          padding: isPhone ? "18px 16px 24px" : "22px 28px",
+        }}
+      >
         <div
           style={{
             fontSize: 11,
@@ -58,7 +67,7 @@ export function AnalyticsPanel({
 
         <h1
           style={{
-            fontSize: "clamp(26px, 2.8vw, 42px)",
+            fontSize: isPhone ? 26 : "clamp(26px, 2.8vw, 42px)",
             fontWeight: 700,
             lineHeight: 1,
             letterSpacing: "-0.025em",
@@ -82,20 +91,29 @@ export function AnalyticsPanel({
           <ShimmerRows count={3} height={72} />
         ) : (
           <>
-            <div style={{ display: "flex", gap: 10, marginBottom: 30 }}>
+            <div style={{ display: "flex", gap: 8, marginBottom: isPhone ? 22 : 30 }}>
               {cards.map((card) => (
                 <div
                   key={card.label}
                   style={{
                     flex: 1,
+                    minWidth: 0,
                     borderRadius: 8,
-                    padding: "13px 15px",
+                    padding: isPhone ? "10px 10px" : "13px 15px",
                     background: B.charcoal,
                     border: `1px solid ${B.line}`,
                   }}
                 >
                   <div style={{ fontSize: 11, color: B.muted, marginBottom: 7 }}>{card.label}</div>
-                  <div style={{ fontSize: 26, fontWeight: 600, fontFamily: MONO, color: card.color, lineHeight: 1 }}>
+                  <div
+                    style={{
+                      fontSize: isPhone ? 22 : 26,
+                      fontWeight: 600,
+                      fontFamily: MONO,
+                      color: card.color,
+                      lineHeight: 1,
+                    }}
+                  >
                     {card.value}
                   </div>
                   <div style={{ fontSize: 11, color: B.faint, marginTop: 5 }}>{card.sub}</div>
@@ -103,7 +121,12 @@ export function AnalyticsPanel({
               ))}
             </div>
 
-            <Donut onTime={summary.onTime} late={summary.late} missed={summary.missed} />
+            <Donut
+              onTime={summary.onTime}
+              late={summary.late}
+              missed={summary.missed}
+              size={isPhone ? 240 : 300}
+            />
           </>
         )}
       </div>

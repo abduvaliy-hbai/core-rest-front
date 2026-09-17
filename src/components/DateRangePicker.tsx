@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState, type CSSProperties, type ReactNode } from "react";
 import { todayKey } from "../format";
+import { useBreakpoint } from "../hooks/useBreakpoint";
 import { B, SANS } from "../theme";
 import {
   addMonths,
@@ -195,6 +196,8 @@ export function DateRangePicker({ fromDate, toDate, onChange }: DateRangePickerP
     setDatePickerOpen(false);
   };
 
+  const isPhone = useBreakpoint() === "phone";
+
   return (
     <div style={{ position: "relative" }}>
       <button
@@ -203,6 +206,8 @@ export function DateRangePicker({ fromDate, toDate, onChange }: DateRangePickerP
         style={{
           display: "flex",
           alignItems: "center",
+          justifyContent: isPhone ? "center" : "flex-start",
+          width: isPhone ? "100%" : undefined,
           gap: 8,
           background: B.charcoal,
           border: `1px solid ${datePickerOpen ? B.orange : B.faint}`,
@@ -239,16 +244,22 @@ export function DateRangePicker({ fromDate, toDate, onChange }: DateRangePickerP
           />
           <div
             style={{
-              position: "absolute",
-              top: "calc(100% + 8px)",
-              right: 0,
+              position: isPhone ? "fixed" : "absolute",
+              top: isPhone ? "50%" : "calc(100% + 8px)",
+              left: isPhone ? "50%" : undefined,
+              right: isPhone ? undefined : 0,
+              transform: isPhone ? "translate(-50%, -50%)" : undefined,
+              width: isPhone ? "min(340px, calc(100vw - 24px))" : undefined,
+              maxHeight: isPhone ? "calc(100vh - 32px)" : undefined,
+              overflowY: isPhone ? "auto" : undefined,
               zIndex: 40,
               display: "flex",
+              flexDirection: isPhone ? "column" : "row",
               background: B.charcoal,
               border: `1px solid ${B.faint}`,
               borderRadius: 10,
               boxShadow: "0 20px 48px rgba(0,0,0,.65)",
-              overflow: "hidden",
+              overflow: isPhone ? "auto" : "hidden",
               fontFamily: SANS,
             }}
           >
@@ -382,13 +393,14 @@ export function DateRangePicker({ fromDate, toDate, onChange }: DateRangePickerP
 
             <aside
               style={{
-                width: 168,
+                width: isPhone ? "100%" : 168,
                 flexShrink: 0,
                 display: "flex",
                 flexDirection: "column",
                 gap: 2,
                 padding: "14px 12px 16px",
-                borderLeft: `1px solid ${B.line}`,
+                borderLeft: isPhone ? "none" : `1px solid ${B.line}`,
+                borderTop: isPhone ? `1px solid ${B.line}` : "none",
               }}
             >
               <strong

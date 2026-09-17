@@ -1,4 +1,5 @@
 import { formatLocalTime } from "../format";
+import { useBreakpoint } from "../hooks/useBreakpoint";
 import { B, MONO } from "../theme";
 import type { DailyStatusMember, DailyStatusUserDay } from "../types";
 import { dayLabel } from "../utils/dateRange";
@@ -15,17 +16,19 @@ type RecordsPanelProps = {
 export function RecordsPanel({ days, error, loading, selectedMember }: RecordsPanelProps) {
   // The API returns days oldest-first; the scroll reads best with the newest day on top.
   const records = [...days].reverse();
+  const isStacked = useBreakpoint() !== "desktop";
 
   return (
     <div
       style={{
-        width: 330,
+        width: isStacked ? "100%" : 330,
         flexShrink: 0,
         display: "flex",
         flexDirection: "column",
-        borderRight: `1px solid ${B.line}`,
-        background: B.surfaceMid,
-        height: "100%",
+        borderRight: isStacked ? "none" : `1px solid ${B.line}`,
+        borderBottom: isStacked ? `1px solid ${B.line}` : "none",
+        height: isStacked ? "auto" : "100%",
+        maxHeight: isStacked ? "52vh" : undefined,
         overflow: "hidden",
       }}
     >
