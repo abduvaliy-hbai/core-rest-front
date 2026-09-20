@@ -101,7 +101,7 @@ export function AnalyticsPanel({
                   style={{
                     flex: 1,
                     minWidth: 0,
-                    borderRadius: 8,
+                    borderRadius: 0,
                     padding: isPhone ? "10px 10px" : "13px 15px",
                     background: B.charcoal,
                     border: `1px solid ${B.line}`,

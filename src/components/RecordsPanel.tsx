@@ -69,7 +69,7 @@ export function RecordsPanel({ days, error, loading, selectedMember }: RecordsPa
                   alignItems: "center",
                   justifyContent: "space-between",
                   padding: "10px 14px",
-                  borderRadius: 8,
+                  borderRadius: 0,
                   background: B.charcoal,
                   border: `1px solid ${B.line}`,
                   borderLeft: `3px solid ${color}`,
