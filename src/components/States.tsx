@@ -4,7 +4,7 @@ export function ShimmerRows({ count = 6, height = 56 }: { count?: number; height
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
       {Array.from({ length: count }, (_, row) => (
-        <div key={row} className="shimmer" style={{ height, borderRadius: 8 }} />
+        <div key={row} className="shimmer" style={{ height, borderRadius: 0 }} />
       ))}
     </div>
   );
@@ -31,7 +31,7 @@ export function EmptyState({
         textAlign: "center",
         minHeight: 120,
         padding: 18,
-        borderRadius: 10,
+        borderRadius: 0,
         border: `1px dashed ${isError ? "rgba(251,113,133,.28)" : B.lineStr}`,
         background: isError ? "rgba(251,113,133,.06)" : "transparent",
       }}

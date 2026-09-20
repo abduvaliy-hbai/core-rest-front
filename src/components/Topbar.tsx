@@ -56,7 +56,7 @@ export function Topbar({ counts, employeeCount, fromDate, loading, onRangeChange
                 justifyContent: "center",
                 gap: 5,
                 padding: "7px 4px",
-                borderRadius: 8,
+                borderRadius: 0,
                 background: B.charcoal,
                 border: `1px solid ${B.line}`,
               }}

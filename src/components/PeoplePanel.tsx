@@ -34,7 +34,7 @@ function StateCard({ title, detail, tone }: { title: string; detail: string; ton
         gap: 6,
         justifyItems: "center",
         textAlign: "center",
-        borderRadius: 12,
+        borderRadius: 0,
         border: `1px dashed ${isError ? "rgba(251,113,133,.28)" : B.lineStr}`,
         background: isError ? "rgba(251,113,133,.06)" : "transparent",
       }}
@@ -114,7 +114,7 @@ export function PeoplePanel({
             style={{
               width: "100%",
               height: 36,
-              borderRadius: 8,
+              borderRadius: 0,
               background: B.charcoal,
               border: `1px solid ${B.faint}`,
               color: B.text,
@@ -142,7 +142,7 @@ export function PeoplePanel({
           <StateCard title="Could not load users" detail={error} tone="error" />
         ) : loading ? (
           SHIMMER_ROWS.map((row) => (
-            <div key={row} className="shimmer" style={{ height: 56, borderRadius: 8, margin: "8px 12px" }} />
+            <div key={row} className="shimmer" style={{ height: 56, borderRadius: 0, margin: "8px 12px" }} />
           ))
         ) : isEmptyReport ? (
           <StateCard title="No employees" detail="No members were mapped for this date." tone="neutral" />

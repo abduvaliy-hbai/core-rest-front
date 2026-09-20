@@ -30,7 +30,7 @@ export function BackBar({ onBack, title }: BackBarProps) {
           // Comfortably past the 44px minimum touch target once padding counts.
           minHeight: 36,
           padding: "6px 12px 6px 8px",
-          borderRadius: 8,
+          borderRadius: 0,
           border: `1px solid ${B.faint}`,
           background: B.charcoal,
           color: B.soft,
