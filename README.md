@@ -65,3 +65,14 @@ handover notes for this branch; the notable ones are a donut that no longer
 renders blank at 100% of a single status, a working date-range picker in place
 of the export's decorative button, real loading/error/empty states, and a
 responsive layout below 1040px.
+
+## Versioning & Releases
+
+Tooling carried over from [`humblebeeai/base-template`](https://github.com/humblebeeai/base-template):
+
+- Show current version: `./scripts/get-version.sh`
+- Bump version: `./scripts/bump-version.sh -b=<patch|minor|major> [-c -t -p]`
+  - `-c` commit `VERSION.txt`; `-t` create tag; `-p` push commit/tag.
+- `1. Bump Version` GitHub Action (manual dispatch) runs the same script with commit+tag+push.
+- `pre-commit install` enables the shared hook set (`.pre-commit-config.yaml`) — secrets scan,
+  YAML/JSON checks, shell/Python lint. Run `pre-commit run --all-files` before pushing.
